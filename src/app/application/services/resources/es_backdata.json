@@ -1,0 +1,46 @@
+{
+    "products" : [
+        {
+            "id" : 1,
+            "class_name" : "농심)신라면",
+            "price" : 3000,
+            "img_url" : "https://www.armyost.com/1",
+            "analyze" : "농심)신라면"
+        },
+        {
+            "id" : 2,
+            "class_name" : "오뚜기)진라면 순한맛",
+            "price" : 2500,
+            "img_url" : "https://www.armyost.com/2",
+            "analyze" : "오뚜기)진라면 순한맛"
+        },
+        {
+            "id" : 3,
+            "class_name" : "오뚜기)진라면 매운맛",
+            "price" : 2200,
+            "img_url" : "https://www.armyost.com/3",
+            "analyze" : "오뚜기)진라면 매운맛"
+        },
+        {
+            "id" : 4,
+            "class_name" : "농심)짜파게티",
+            "price" : 2800,
+            "img_url" : "https://www.armyost.com/4",
+            "analyze" : "농심)짜파게티"
+        },
+        {
+            "id" : 5,
+            "class_name" : "삼양)비빔면",
+            "price" : 3000,
+            "img_url" : "https://www.armyost.com/5",
+            "analyze" : "삼양)비빔면"
+        },
+        {
+            "id" : 6,
+            "class_name" : "오뚜기)열라면 파",
+            "price" : 1500,
+            "img_url" : "https://www.armyost.com/6",
+            "analyze" : "오뚜기)열라면 파"
+        }
+    ]
+}
