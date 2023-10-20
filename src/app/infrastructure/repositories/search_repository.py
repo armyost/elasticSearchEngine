@@ -8,12 +8,12 @@ class searchRepository(BaseEsRepository, SearchRepositoryInterface):
                                     doc_type='dictionary_datas',
                                     body={
                                         "query": {
-                                            "multi_match": {
+                                            "match": {
                                                 "query": keyword,
-                                                "fields": ["title", "content"]
+                                                "fields": "class_name"
                                             }
                                         }
                                     })
- 
             searchDataList = docs['hits']
+            ## Search 객체에 담는것도 생각해볼 필요 있음
             return searchDataList

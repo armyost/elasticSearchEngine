@@ -8,8 +8,14 @@ def init_es_engine(es_uri=None):
     __create_index_if_not_exists(es_engine)
     return es_engine
 
-def db_connect(es_engine):
+def es_connect(es_engine):
     return es_engine
+
+def close_es_connection(es_connection):
+    try:
+        es_connection.transport.close()
+    except:
+        pass
 
 def __create_index_if_not_exists(es_engine):
         if es_engine.indices.exists(index='dictionary'):

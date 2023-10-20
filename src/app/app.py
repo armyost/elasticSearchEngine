@@ -37,8 +37,7 @@ def ping():
 def importSourceData2Es():
     if request.method == 'POST':
         return jsonify({'status': 'alive!'})
-    es_con = get_es_connection(app)
-    return ImportBackdataService.importSourceDatas2ES(es_con)
+    return ImportBackdataService.importSourceDatas2ES(get_es_connection(app))
 
 @app.route("/searchByKeyword", methods=['GET', 'POST'])
 def searchByKeyword():
