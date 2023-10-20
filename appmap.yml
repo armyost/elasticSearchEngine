@@ -1,0 +1,9 @@
+appmap_dir: tmp\appmap
+language: python
+name: elasticSearchEngine
+packages:
+- path: controller
+- path: infrastructure
+- path: domain
+- path: application
+- path: test

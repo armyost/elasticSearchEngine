@@ -6,9 +6,9 @@ from flask import (Flask, g, jsonify, request)
 from application.exceptions import WrongFileStructureException
 from application.services import (AcquirePdfFile, AnonymizeTxtFile, UserService, DepartmentService, ImportBackdataService)
 from controller.exceptions import BadRequestException
-from controller.utils import (file_by_mimetype, filter_request_consistency)
-from infrastructure.elastic_search import (init_es_engine)
-from infrastructure.repositories import (ReportRepository, UserRepository, DepartmentRepository)
+from controller.utils import (filter_data_consistency)
+from infrastructure.elastic_search import (init_es_engine, es_connect)
+from infrastructure.repositories import (SearchRepository)
 
 ###################################### Configuration ########################################
 
@@ -17,7 +17,7 @@ app = Flask(__name__)
 def get_es_connection(app):
     if 'es_con' not in g:
         es_engine = app.config.get('ES_ENGINE', None) or init_es_engine()
-        g.es_con = es_engine
+        g.es_con = es_connect(es_engine)
     return g.es_con
 
 @app.errorhandler(BadRequestException)
@@ -39,6 +39,16 @@ def importSourceData2Es():
         return jsonify({'status': 'alive!'})
     es_con = get_es_connection(app)
     return ImportBackdataService.importSourceDatas2ES(es_con)
+
+@app.route("/searchByKeyword", methods=['GET', 'POST'])
+def searchByKeyword():
+    if request.method == 'GET':
+        return jsonify({'status': 'alive!'})
+    keyword = filter_data_consistency(request, keyword)['keyword']
+    repository=SearchRepository(get_es_connection(app))
+    return jsonify(searchByKeyword.searchByKeyword(repository, keyword))
+
+
 
 # @app.route("/userAdd", methods=['GET', 'POST'])
 # def userAdd():

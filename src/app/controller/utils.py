@@ -1,3 +1,4 @@
+from flask import Response
 from controller.exceptions import BadRequestException
 
 
@@ -17,3 +18,10 @@ def filter_request_consistency(request, type):
     if isinstance(paramId, type) is False:
         raise BadRequestException({'id': 'wrong data type'})
     return request.json
+
+def filter_data_consistency(request, key):
+    if not request.json[key]:
+        raise BadRequestException({key: 'mandatory'})
+        # return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'search word param is missing'})
+    return request.json
+    

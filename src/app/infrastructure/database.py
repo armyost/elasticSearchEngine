@@ -39,17 +39,14 @@ def init_db_engine(db_uri=None):
     __create_tables_if_not_exists(db_engine)
     return db_engine
 
-
 def db_connect(db_engine):
     return db_engine.connect()
-
 
 def close_db_connection(db_connection):
     try:
         db_connection.close()
     except:
         pass
-
 
 def __create_tables_if_not_exists(db_engine):
     # NOTE:  use Alembic for migrations (https://alembic.sqlalchemy.org/en/latest/)
