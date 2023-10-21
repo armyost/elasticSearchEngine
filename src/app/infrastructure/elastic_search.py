@@ -22,7 +22,7 @@ def __create_index_if_not_exists(es_engine):
             logging.warn("!!! ElasticSearch Index Already Exist !!!")
         else:
             logging.warn("!!! No ElasticSearch Index Exist, So I will create new one !!!")
-            response = es.indices.create(
+            response = es_engine.indices.create(
                 index='dictionary',
                 body={
                     "settings": {

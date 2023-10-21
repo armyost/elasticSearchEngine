@@ -4,6 +4,5 @@ from domain.models import Search
 class SearchEngineService:
 
     def searchByKeyword(repository, keyword):
-        searchResultDataList = repository.selectWithKeyword(keyword)
-        return searchResultDataList
-        
+        searchResults = repository.selectWithKeyword(keyword)
+        return [search.as_dict() for search in searchResults]

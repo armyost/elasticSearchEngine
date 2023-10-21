@@ -4,7 +4,7 @@ import os
 from flask import (Flask, g, jsonify, request)
 
 from application.exceptions import WrongFileStructureException
-from application.services import (AcquirePdfFile, AnonymizeTxtFile, UserService, DepartmentService, ImportBackdataService)
+from application.services import (ImportBackdataService, SearchEngineService)
 from controller.exceptions import BadRequestException
 from controller.utils import (filter_data_consistency)
 from infrastructure.elastic_search import (init_es_engine, es_connect)
@@ -43,9 +43,10 @@ def importSourceData2Es():
 def searchByKeyword():
     if request.method == 'GET':
         return jsonify({'status': 'alive!'})
-    keyword = filter_data_consistency(request, keyword)['keyword']
+    searchInfo = filter_data_consistency(request, "keyword")
+    keyword = searchInfo['keyword']
     repository=SearchRepository(get_es_connection(app))
-    return jsonify(searchByKeyword.searchByKeyword(repository, keyword))
+    return jsonify(SearchEngineService.searchByKeyword(repository, keyword))
 
 
 

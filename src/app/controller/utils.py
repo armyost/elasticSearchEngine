@@ -20,7 +20,7 @@ def filter_request_consistency(request, type):
     return request.json
 
 def filter_data_consistency(request, key):
-    if not request.json[key]:
+    if key not in request.json:
         raise BadRequestException({key: 'mandatory'})
         # return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'search word param is missing'})
     return request.json

@@ -1,19 +1,26 @@
-from domain.repositories import (BaseEsRepository, SearchRepositoryInterface)
+from domain.repositories import SearchRepositoryInterface
+from infrastructure.repositories import BaseEsRepository
+from domain.models import Search
 
-class searchRepository(BaseEsRepository, SearchRepositoryInterface):
-
+class SearchRepository(BaseEsRepository, SearchRepositoryInterface):
+    
     def selectWithKeyword(self, keyword):
+        searchResults = []
+
         with self.es_connection as es_con:
             docs = es_con.search(index='dictionary',
-                                    doc_type='dictionary_datas',
                                     body={
                                         "query": {
                                             "match": {
-                                                "query": keyword,
-                                                "fields": "class_name"
+                                                "class_name": keyword
                                             }
                                         }
                                     })
-            searchDataList = docs['hits']
-            ## Search 객체에 담는것도 생각해볼 필요 있음
-            return searchDataList
+            for searchResult in docs['hits']['hits']:
+                id = searchResult['_source']['id']
+                price = searchResult['_source']['price']
+                imgUrl = searchResult['_source']['img_url']
+                className = searchResult['_source']['class_name']
+                searchVo = Search(id, price, imgUrl, className)
+                searchResults.append(searchVo)
+            return searchResults

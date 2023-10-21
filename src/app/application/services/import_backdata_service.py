@@ -8,7 +8,7 @@ class ImportBackdataService:
     def importSourceDatas2ES(es_con):
         jsonDataPath = os.path.dirname(__file__)
         filename = os.path.join(jsonDataPath, 'resources/es_backdata.json')
-        logging("!!! Import File "+filename+" !!!")
+        logging.warn("!!! Import File "+filename+" !!!")
         with open(filename, 'r', encoding='utf-8') as file:
             datas = json.load(file)
             body = ""
