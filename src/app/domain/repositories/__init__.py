@@ -1,4 +1,1 @@
-# from .report_repository_interface import ReportRepositoryInterface
-# from .user_repository_interface import UserRepositoryInterface
-# from .department_repository_interface import DepartmentRepositoryInterface
 from .search_repository_interface import SearchRepositoryInterface
